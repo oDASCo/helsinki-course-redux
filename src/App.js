@@ -5,6 +5,8 @@ import {
 } from "react-router-dom"
 import {useParams} from "react-router";
 import {useField} from "./hooks";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Menu = () => {
   const padding = {
@@ -93,7 +95,7 @@ const CreateNew = (props) => {
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
           <div>
               content
               <input
@@ -118,9 +120,9 @@ const CreateNew = (props) => {
                   onChange={info.onChange}
               />
           </div>
-        <button>create</button>
-          <button onClick={reset}>reset</button>
-      </form>
+        <Button variant="primary" type="submit">create</Button>
+          <Button variant="primary" onClick={reset}>reset</Button>
+      </Form>
     </div>
   )
 }
@@ -175,29 +177,32 @@ const App = () => {
   }
 
   return (
-      <Router>
-          <div>
-              <h1>Software anecdotes</h1>
-              <Menu />
-          </div>
+      <div className="container">
+          <Router>
+              <div>
+                  <h1>Software anecdotes</h1>
+                  <Menu />
+              </div>
 
-          <Switch>
-              <Route path="/about">
-                  <About />
-              </Route>
-              <Route path="/create">
-                  <CreateNew addNew={addNew} />
-              </Route>
-              <Route path="/anecdotes/:id">
-                  <Anecdote anecdotes={anecdotes} />
-              </Route>
-              <Route path="/">
-                  <Notification />
-                  <AnecdoteList anecdotes={anecdotes} />
-              </Route>
-          </Switch>
-          <Footer />
-      </Router>
+              <Switch>
+                  <Route path="/about">
+                      <About />
+                  </Route>
+                  <Route path="/create">
+                      <CreateNew addNew={addNew} />
+                  </Route>
+                  <Route path="/anecdotes/:id">
+                      <Anecdote anecdotes={anecdotes} />
+                  </Route>
+                  <Route path="/">
+                      <Notification />
+                      <AnecdoteList anecdotes={anecdotes} />
+                  </Route>
+              </Switch>
+              <Footer />
+          </Router>
+      </div>
+
   )
 }
 
